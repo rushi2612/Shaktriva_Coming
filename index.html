@@ -169,6 +169,144 @@
         .bg-gradient-radial {
             background-image: radial-gradient(circle at center, var(--tw-gradient-stops));
         }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animated-gradient-text {
+            background: linear-gradient(270deg,
+                    #0f2d5e,
+                    #1a4a8a,
+                    #2d6bc4,
+                    #4d9de0,
+                    #2d6bc4,
+                    #1a4a8a,
+                    #0f2d5e);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        /* ===== COMING SOON — Letter Reveal ===== */
+        @keyframes letterReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(25px) scale(0.85) rotateX(40deg);
+                filter: blur(6px);
+            }
+
+            60% {
+                opacity: 1;
+                transform: translateY(-3px) scale(1.03) rotateX(0deg);
+                filter: blur(0);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotateX(0deg);
+                filter: blur(0);
+            }
+        }
+
+        .cs-letter {
+            display: inline-block;
+            opacity: 0;
+            animation: letterReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            position: relative;
+        }
+
+        /* ===== Shimmer Sweep (overlay approach) ===== */
+        @keyframes shimmerSweep {
+            0% {
+                left: -50%;
+            }
+
+            100% {
+                left: 150%;
+            }
+        }
+
+        .coming-soon-wrapper {
+            perspective: 600px;
+            position: relative;
+            overflow: hidden;
+            padding: 8px 16px;
+        }
+
+        .coming-soon-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    rgba(77, 157, 224, 0.25) 40%,
+                    rgba(0, 179, 254, 0.35) 50%,
+                    rgba(77, 157, 224, 0.25) 60%,
+                    transparent 100%);
+            animation: shimmerSweep 3s 2s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .coming-soon-text {
+            color: #0f2d5e;
+        }
+
+        /* ===== Gentle Float ===== */
+        @keyframes gentleFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .cs-float {
+            animation: gentleFloat 5s 1.5s ease-in-out infinite;
+        }
+
+        /* ===== Glow Pulse via text-shadow ===== */
+        @keyframes glowText {
+
+            0%,
+            100% {
+                text-shadow: 0 0 8px rgba(0, 74, 173, 0.0);
+            }
+
+            50% {
+                text-shadow: 0 0 20px rgba(0, 74, 173, 0.18), 0 0 40px rgba(0, 179, 254, 0.10);
+            }
+        }
+
+        .coming-soon-text {
+            animation: gentleFloat 5s 1.5s ease-in-out infinite, glowText 4s 2s ease-in-out infinite;
+        }
+
+        /* Space between COMING and SOON */
+        .cs-space {
+            display: inline-block;
+            width: 0.35em;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&amp;display=swap" rel="stylesheet" />
 </head>
@@ -186,24 +324,39 @@
             <div class="flex flex-col items-center space-y-stack-sm mb-stack-sm">
                 <div
                     class="w-32 h-32 md:w-40 md:h-40 rounded-full bg-white shadow-[0_20px_40px_rgba(0,74,173,0.08)] flex items-center justify-center border border-primary-fixed p-6 mb-4 relative overflow-hidden">
-                    <img alt="SHAKTRIVA Logo" class="w-full h-full object-contain p-2"
-                        src="https://lh3.googleusercontent.com/aida/ADBb0ui7ulF4e16T-HipGi4XEX2bpgqOkmDnfZl_xWXWHUeC64pjYOjmTD9kMA2fFc1RtxM8FOarOpvXW5tmCd916tpIkDMMovHVfFNluXo2-c7ATASF3wr4Dpj2wb5aCdXTULca0KNpYLd-SyVAgLqJpCEzteElT4KbN43mUasCajsvRzemo8AEuhSKIduMPkwre1g_gMaaEvO_dlpise6ZzWqSoM3fEwuGW-MOhVa7kY9spyCUqR9mYyAITDjb4hAsuH2DJ0Yy82V1a9g" />
+                    <img src="shaktriva-logo.png" alt="Shaktriva Logo" class="w-full h-full object-contain p-2">
                 </div>
-                <img alt="SHAKTRIVA" class="h-12 md:h-16 w-auto object-contain mx-auto mb-2"
-                    src="https://lh3.googleusercontent.com/aida/ADBb0ugEnsvHXwAuP8-XWiufflXKzH20cxX5YFOdPPsBb-_lldfWZW4Swty-yAjCUUqbJhteZIZMQ6i_orqa9txBSGPhlJjibwlv19xCM-nGElxsYY4UEj2NC-EfcOh1YaHRxEd2jms0xLkB2o-gcngAZjECjU9yVMFnfWREwKp3-6mGyRsBX06Wzc2sIlviwEng_pzgo0RJe8dUILLXSVbcc5GFoKLNFKJEbjQpTYkRnqkP-bljvt5i4fd9S2vn9oUmOnNlIuqm60p1zkA" />
-                <h2
-                    class="font-headline-md text-headline-md text-on-surface font-light tracking-[0.3em] uppercase opacity-80">
-                    COMING SOON
-                </h2>
+                <span
+                    class="animated-gradient-text text-4xl md:text-[2.5rem] font-bold tracking-[0.08em] leading-none mb-2 uppercase"
+                    style="font-family: 'Goldman', sans-serif;">
+                    SHAKTRIVA
+                </span>
+
+                <div class="coming-soon-wrapper mt-6">
+                    <h2 class="coming-soon-text font-['Goldman'] text-2xl md:text-5xl tracking-[0.3em] uppercase"
+                        id="coming-soon-heading" aria-label="Coming Soon">
+                        <span class="cs-letter" style="animation-delay:0.1s">C</span><span class="cs-letter"
+                            style="animation-delay:0.16s">O</span><span class="cs-letter"
+                            style="animation-delay:0.22s">M</span><span class="cs-letter"
+                            style="animation-delay:0.28s">I</span><span class="cs-letter"
+                            style="animation-delay:0.34s">N</span><span class="cs-letter"
+                            style="animation-delay:0.40s">G</span><span class="cs-space"></span><span class="cs-letter"
+                            style="animation-delay:0.55s">S</span><span class="cs-letter"
+                            style="animation-delay:0.61s">O</span><span class="cs-letter"
+                            style="animation-delay:0.67s">O</span><span class="cs-letter"
+                            style="animation-delay:0.73s">N</span>
+                    </h2>
+                </div>
             </div>
             <div class="w-16 h-px bg-primary/20"></div>
             <!-- Tagline and Mission -->
             <div class="space-y-6 max-w-xl mx-auto">
                 <p class="font-label-sm text-label-sm text-secondary tracking-[0.2em] font-bold uppercase">
-                    POWER. PURPOSE. TRANSFORMATION.
+                    INNOVATE. INTEGRATE. ELEVATE.
                 </p>
                 <p class="font-body-lg text-body-lg text-on-surface-variant font-light leading-relaxed">
-                    Shaktriva is on a mission to inspire conscious living, inner balance and limitless potential.
+                    SHAKTRIVA delivers end-to-end IoT solutions, professional PCB designing, and embedded system
+                    development for modern industries.
                 </p>
             </div>
             <!-- CTA Section -->
@@ -229,12 +382,11 @@
     </main>
     <!-- Footer Component generated from JSON -->
     <footer
-        class="bg-[#111111] text-white relative overflow-hidden flex flex-col items-center justify-center min-h-[80px] md:min-h-[200px] py-6 md:py-12">
+        class="bg-[#111111] text-white relative overflow-hidden flex flex-col items-center justify-end pt-10 md:pt-18 pb-0 w-full">
         <!-- Oversized Watermark -->
-        <div
-            class="absolute bottom-0 md:bottom-[-4vw] left-1/2 -translate-x-1/2 w-full text-center pointer-events-none flex items-center justify-center translate-y-1/4 md:translate-y-0">
+        <div class="w-full text-center pointer-events-none flex items-center justify-center">
             <h3
-                class="text-[16vw] leading-none font-bold text-white/[0.2] uppercase tracking-tighter select-none font-['Goldman']">
+                class="text-[16vw] leading-[0.8] font-bold text-white/[0.2] uppercase tracking-tighter select-none font-['Goldman'] translate-y-[15%]">
                 SHAKTRIVA</h3>
         </div>
     </footer>
@@ -284,7 +436,7 @@
                     formMessage.textContent = msg;
                     formMessage.className = "text-sm mt-4 text-center text-error font-medium";
                     formMessage.classList.remove('hidden');
-                    
+
                     // Reset button
                     btnText.textContent = "NOTIFY ME";
                     submitBtn.disabled = false;
