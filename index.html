@@ -204,28 +204,27 @@
         @keyframes letterReveal {
             0% {
                 opacity: 0;
-                transform: translateY(25px) scale(0.85) rotateX(40deg);
-                filter: blur(6px);
+                transform: translateY(20px) translateZ(0);
             }
 
             60% {
                 opacity: 1;
-                transform: translateY(-3px) scale(1.03) rotateX(0deg);
-                filter: blur(0);
+                transform: translateY(-2px) translateZ(0);
             }
 
             100% {
                 opacity: 1;
-                transform: translateY(0) scale(1) rotateX(0deg);
-                filter: blur(0);
+                transform: translateY(0) translateZ(0);
             }
         }
 
         .cs-letter {
             display: inline-block;
             opacity: 0;
-            animation: letterReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            position: relative;
+            animation: letterReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         /* ===== Shimmer Sweep (overlay approach) ===== */
@@ -300,6 +299,9 @@
 
         .coming-soon-text {
             animation: gentleFloat 5s 1.5s ease-in-out infinite, glowText 4s 2s ease-in-out infinite;
+            will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         /* Space between COMING and SOON */
@@ -333,7 +335,7 @@
                 </span>
 
                 <div class="coming-soon-wrapper mt-6">
-                    <h2 class="coming-soon-text font-['Goldman'] text-2xl md:text-5xl tracking-[0.3em] uppercase"
+                    <h2 class="coming-soon-text font-['Goldman'] text-xl md:text-5xl tracking-[0.1em] md:tracking-[0.3em] uppercase whitespace-nowrap"
                         id="coming-soon-heading" aria-label="Coming Soon">
                         <span class="cs-letter" style="animation-delay:0.1s">C</span><span class="cs-letter"
                             style="animation-delay:0.16s">O</span><span class="cs-letter"
